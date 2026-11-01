@@ -123,7 +123,8 @@ function Network({shape,selected,onSelect,onDragChange}:{shape:Shape;selected:nu
     setImpactCount(v=>v+1);onSelect(i);
   },[anchors,graph,onSelect]);
   const beginDrag=(e:ThreeEvent<PointerEvent>,i:number)=>{
-    e.stopPropagation();e.target?.setPointerCapture?.(e.pointerId);
+    e.stopPropagation();
+    (e.target as Element | null)?.setPointerCapture(e.pointerId);
     const anchor=anchors[i];const p=V(positions[anchor*3],positions[anchor*3+1],positions[anchor*3+2]);
     dragging.current={anchor,pointerId:e.pointerId,point:p.clone(),last:p.clone(),moved:false};
     onDragChange(true);document.body.style.cursor='grabbing';
@@ -139,7 +140,8 @@ function Network({shape,selected,onSelect,onDragChange}:{shape:Shape;selected:nu
   };
   const endDrag=(e:ThreeEvent<PointerEvent>,i:number)=>{
     e.stopPropagation();const drag=dragging.current;if(!drag)return;
-    if(e.target.hasPointerCapture(e.pointerId))e.target.releasePointerCapture(e.pointerId);
+    const target = e.target as Element | null;
+    if(target?.hasPointerCapture(e.pointerId))target.releasePointerCapture(e.pointerId);
     dragging.current=null;onDragChange(false);document.body.style.cursor='pointer';
     if(!drag.moved)onNodeClick(i);else onNodeClick(i); // Release sends an electric chain pulse.
   };
