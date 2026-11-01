@@ -8,7 +8,7 @@ import { portfolioProjects } from '../../data/projects';
 const filters = ['Todos', 'Experiencias creativas', 'Full Stack', 'Calidad & producto', 'Liderazgo', 'Web & UX'];
 // Tres proyectos de Creative Lab primero, seguidos de los casos profesionales.
 const orderedProjects = [...portfolioProjects].sort((a,b) => {
-  const priority=['nebula','synapse','speed','boticpartners','equilibrio','chicksgold','chicksx','tangoWeb','congreso'];
+  const priority=['nebula','synapse','atlas','eon','speed','boticpartners','equilibrio','chicksgold','chicksx','tangoWeb','congreso'];
   const aIndex=priority.indexOf(a.id);
   const bIndex=priority.indexOf(b.id);
   if(aIndex>=0&&bIndex>=0)return aIndex-bIndex;
@@ -34,7 +34,7 @@ export default function Projects() {
           <div><p className="section-kicker">01 / TRABAJOS SELECCIONADOS</p><h2>Proyectos con <span className="gradient-text">impacto real.</span></h2><p>Desarrollo Full Stack, producto y experiencias creativas. Explorá los proyectos, sus decisiones técnicas y mi participación.</p></div>
           <span className="section-counter">{portfolioProjects.length} PROYECTOS / 05 ÁREAS</span>
         </div>
-        <div className="creative-showcase-note"><span className="creative-showcase-pulse" aria-hidden="true"/><div><strong>CREATIVE LAB · 2026</strong><p>NEBULA, SYNAPSE y SPEED: tres proyectos personales para demostrar interfaces inmersivas, interacción y motion design. Cada uno tiene su propio caso de estudio.</p></div></div>
+        <div className="creative-showcase-note"><span className="creative-showcase-pulse" aria-hidden="true"/><div><strong>CREATIVE LAB · 2026</strong><p>NEBULA, SYNAPSE, ATLAS, EON y SPEED: proyectos personales que muestran experiencias inmersivas, desarrollo web y motion design.</p></div></div>
         <div className="project-toolbar">
           <div className="filters" role="group" aria-label="Filtrar por especialidad">
             {filters.map(item => <button type="button" key={item} onClick={() => {setFilter(item);setShowAll(true);}} className={`filter-chip ${filter===item ? 'active' : ''}`} aria-pressed={filter===item}>{item}</button>)}

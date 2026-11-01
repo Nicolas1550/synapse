@@ -1,4 +1,4 @@
-// 14 proyectos originales conservados + 3 proyectos creativos incorporados desde sus ZIPs.
+// 17 proyectos originales conservados (SYNAPSE actualizado) + ATLAS y EON.
 // MakeUp y Peluquería mantienen repositorios y videos: el despliegue público es una demo parcial.
 export type PortfolioProject = {
  id: string; title: string; originalTitle: string; role: string; category: string; summary: string; description: string; technologies: string[]; image: string; link: string | null; frontendGithub: string | null; backendGithub: string | null; github: string | null; demoVideo: string | null; featured: boolean; demoLimited: boolean; creative?: boolean; caseStudy?: string; comingSoon?: boolean;
@@ -46,16 +46,63 @@ export const portfolioProjects: PortfolioProject[] = [
       "React"
     ],
     "image": "/projects/synapse.webp",
-    "link": null,
+    "link": "https://synapse-le8l.vercel.app/",
     "frontendGithub": null,
     "backendGithub": null,
-    "github": null,
+    "github": "https://github.com/Nicolas1550/synapse",
     "demoVideo": null,
     "featured": true,
     "demoLimited": false,
     "creative": true,
     "caseStudy": "/projects/synapse",
-    "comingSoon": true
+    "comingSoon": false
+  },
+  {
+    "id": "atlas",
+    "title": "ATLAS",
+    "originalTitle": "ATLAS",
+    "role": "Full Stack / Desarrollo web",
+    "category": "Experiencias creativas",
+    "summary": "Proyecto web ATLAS publicado en Vercel",
+    "description": "Proyecto personal ATLAS, con aplicación desplegada y código fuente disponible para consultar su implementación.",
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript"
+    ],
+    "image": "/projects/atlas.svg",
+    "link": "https://atlas-gamma-blue.vercel.app/",
+    "frontendGithub": null,
+    "backendGithub": null,
+    "github": "https://github.com/Nicolas1550/atlas",
+    "demoVideo": null,
+    "featured": true,
+    "demoLimited": false,
+    "creative": true
+  },
+  {
+    "id": "eon",
+    "title": "EON — The Living City",
+    "originalTitle": "EON — The Living City",
+    "role": "Creative Developer / Simulación 3D",
+    "category": "Experiencias creativas",
+    "summary": "Ciudad 3D interactiva con vehículos, peatones y entornos urbanos",
+    "description": "Experiencia de ciudad interactiva desarrollada con tecnologías web y gráficos 3D. Incluye escenarios urbanos y elementos de simulación visual.",
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Three.js"
+    ],
+    "image": "/projects/eon.svg",
+    "link": "https://eon-three-henna.vercel.app/",
+    "frontendGithub": null,
+    "backendGithub": null,
+    "github": "https://github.com/Nicolas1550/eon",
+    "demoVideo": null,
+    "featured": true,
+    "demoLimited": false,
+    "creative": true
   },
   {
     "id": "speed",
