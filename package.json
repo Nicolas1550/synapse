@@ -1,0 +1,33 @@
+{
+  "name": "synapse-living-interface",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "next": "15.5.28",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "three": "^0.180.0",
+    "@react-three/fiber": "^9.3.0",
+    "@react-three/drei": "^10.7.0",
+    "lucide-react": "^0.468.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/three": "^0.180.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "15.5.28",
+    "@eslint/eslintrc": "^3.3.1"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
