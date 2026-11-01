@@ -157,7 +157,7 @@ function Network({shape,selected,onSelect,onDragChange}:{shape:Shape;selected:nu
     const energy=new Float32Array(COUNT);
     for(let i=0;i<COUNT;i++){
       const off=i*3,target=targets[i],node=V(positions[off],positions[off+1],positions[off+2]);
-      let destination=target.clone();
+      const destination=target.clone();
       if(coreWave!==0){const radial=target.clone().normalize();destination.addScaledVector(radial,coreWave);}
       if(blast && blastTime<3.4){const push=Math.sin(Math.min(1,blastTime/2.3)*Math.PI)*1.55;destination.addScaledVector(blast.directions[i],push);}
       const drag=dragging.current;

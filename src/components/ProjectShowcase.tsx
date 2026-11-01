@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {
   ArrowDownRight, ArrowRight, ArrowUpRight, BriefcaseBusiness, Check,
-  ChevronDown, Code2, ExternalLink, Film, Github, Layers3, Play,
+  Code2, ExternalLink, Film, Github, Layers3, Play,
   Sparkles, X
 } from 'lucide-react';
 import { profile } from '@/data/content';
