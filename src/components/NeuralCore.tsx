@@ -123,7 +123,7 @@ function Network({shape,selected,onSelect,onDragChange}:{shape:Shape;selected:nu
     setImpactCount(v=>v+1);onSelect(i);
   },[anchors,graph,onSelect]);
   const beginDrag=(e:ThreeEvent<PointerEvent>,i:number)=>{
-    e.stopPropagation();e.target.setPointerCapture(e.pointerId);
+    e.stopPropagation();e.target?.setPointerCapture?.(e.pointerId);
     const anchor=anchors[i];const p=V(positions[anchor*3],positions[anchor*3+1],positions[anchor*3+2]);
     dragging.current={anchor,pointerId:e.pointerId,point:p.clone(),last:p.clone(),moved:false};
     onDragChange(true);document.body.style.cursor='grabbing';
