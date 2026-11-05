@@ -1,53 +1,56 @@
 import fs from 'node:fs';
 import path from 'node:path';
-
 const root = process.cwd();
-const required = [
-  'src/app/page.tsx', 'src/app/layout.tsx', 'src/app/components/projects/projects.tsx',
-  'src/app/components/cases/cases.tsx', 'src/app/components/recruiter/recruiter.tsx',
-  'src/app/projects/[slug]/page.tsx', 'src/app/data/creativeCases.ts',
-  'src/app/robots.ts', 'src/app/sitemap.ts', 'public/og-portfolio.jpg',
-  'public/cv-nicolas-luciuk.pdf',
-];
-let failures = 0;
-for (const file of required) {
-  if (!fs.existsSync(path.join(root, file))) { console.error('Falta:', file); failures++; }
-}
-const source = fs.readFileSync(path.join(root, 'src/app/data/projects.ts'), 'utf8');
-const ids = [...source.matchAll(/"id":\s*"([a-zA-Z0-9-]+)"/g)].map((match) => match[1]);
-if (ids.length !== 17 || new Set(ids).size !== 17) {
-  console.error(`Se esperaban 17 proyectos distintos, hay ${ids.length}`);
-  failures++;
-}
-const covers = [...source.matchAll(/"image":\s*"(\/projects\/[^\"]+)"/g)].map((match) => match[1]);
-const creative = fs.readFileSync(path.join(root, 'src/app/data/creativeCases.ts'), 'utf8');
-const gallery = [...creative.matchAll(/src: '(\/projects\/[^']+)'/g)].map((match) => match[1]);
-for (const asset of [...covers, ...gallery]) {
-  if (!fs.existsSync(path.join(root, 'public', asset.replace(/^\//, '')))) {
-    console.error('Imagen faltante:', asset); failures++;
+const sourcePath = path.join(root, 'src/app/data/projects.ts');
+const projectText = fs.readFileSync(sourcePath, 'utf8');
+const match = projectText.match(/export const portfolioProjects: PortfolioProject\[\] = (\[[\s\S]*?\]);/);
+if (!match) { console.error('No se encontró el catálogo del portafolio.'); process.exit(1); }
+let projects;
+try { projects = JSON.parse(match[1]); } catch(err){ console.error('Error de datos:',err.message); process.exit(1); }
+const expected = ['nebula','synapse','atlas','eon','speed','frame','sentinel','quantum','chicksx','boticpartners','equilibrio','chicksgold','tangoWeb','congreso','tangoFondo','fundamentals','bici','makeup','ceo-training','ciencia','peluqueria','capacitacionbursatil'];
+let failures = [];
+const ids = projects.map(p => p.id);
+if (projects.length !== 22 || new Set(ids).size !== 22) failures.push(`Deben existir 22 proyectos distintos; hay ${projects.length}`);
+for (const id of expected) if (!ids.includes(id)) failures.push(`Proyecto faltante: ${id}`);
+for (const project of projects){
+  if(!project.image?.startsWith('/projects/')) failures.push(`${project.id}: portada incorrecta`);
+  else if (!fs.existsSync(path.join(root, 'public',project.image.slice(1)))) failures.push(`Falta imagen: ${project.image}`);
+  for(const field of ['link','github','frontendGithub','backendGithub','demoVideo']){
+    const value=project[field];
+    if(value != null && !/^https:\/\/[a-z0-9.-]+(?:\/[^\s]*)?$/i.test(value))failures.push(`${project.id}: enlace inválido en ${field}`);
   }
 }
-for (const id of ['makeup', 'peluqueria', 'boticpartners', 'equilibrio', 'chicksgold', 'chicksx', 'nebula', 'synapse', 'speed']) {
-  if (!ids.includes(id)) { console.error('Proyecto esencial ausente:', id); failures++; }
+const grounded = {
+  nebula: ['https://nebula-chi-two.vercel.app/','https://github.com/Nicolas1550/nebula'],
+  synapse: ['https://synapse-le8l.vercel.app/','https://github.com/Nicolas1550/synapse'],
+  atlas: ['https://atlas-gamma-blue.vercel.app/','https://github.com/Nicolas1550/atlas'],
+  eon: ['https://eon-three-henna.vercel.app/','https://github.com/Nicolas1550/eon'],
+  speed: ['https://speedv2-7rrl.vercel.app/','https://github.com/Nicolas1550/speedv2'],
+  frame: ['https://frame-sandy-nine.vercel.app/','https://github.com/Nicolas1550/frame'],
+  sentinel: ['https://sentinel-sooty-two.vercel.app/','https://github.com/Nicolas1550/sentinel'],
+  quantum: ['https://trading-indol-tau.vercel.app/','https://github.com/Nicolas1550/trading']
+};
+for (const [id, [live,repo]] of Object.entries(grounded)){
+  const item=projects.find(p=>p.id===id);
+  if(!item || item.link !== live || item.github !== repo) failures.push(`${id}: demo o repositorio incorrecto`);
+  if(item?.comingSoon) failures.push(`${id}: se sigue marcando Próximamente`);
 }
-const sitemap = fs.readFileSync(path.join(root, 'src/app/sitemap.ts'), 'utf8');
-for (const id of ['nebula', 'synapse', 'speed']) {
-  if (!source.includes(`"caseStudy": "/projects/${id}"`) || !sitemap.includes(`/projects/${id}`)) {
-    console.error('Falta ficha o sitemap para:', id); failures++;
-  }
+for (const id of ['nebula','synapse','atlas','eon','frame','sentinel','quantum']){
+  if(projects.find(p=>p.id===id)?.image!==`/projects/${id}.webp`) failures.push(`${id}: no utiliza la portada nueva`);
 }
-for (const url of [
-  'https://nebula-chi-two.vercel.app/',
-  'https://github.com/Nicolas1550/nebula',
-  'https://speedv2-7rrl.vercel.app/',
-  'https://github.com/Nicolas1550/speedv2',
-]) {
-  if (!source.includes(url)) { console.error('Enlace de proyecto ausente:', url); failures++; }
+for (const file of ['src/data/showcase.ts','src/data/portfolioProjects.ts','src/components/NeuralCore.tsx','src/components/ProjectShowcase.tsx','src/app/components/projects/projects.tsx','src/app/projects/[slug]/page.tsx','src/app/data/creativeCases.ts']){
+  if(!fs.existsSync(path.join(root,file)))failures.push(`Falta ${file}`);
 }
-const synapseBlock = source.match(/"id": "synapse",[\s\S]*?"caseStudy": "\/projects\/synapse",\s*"comingSoon": true/);
-if (!synapseBlock || !synapseBlock[0].includes('"link": null')) {
-  console.error('SYNAPSE debe permanecer como Próximamente sin URL pública'); failures++;
+const showcase=fs.readFileSync(path.join(root,'src/data/showcase.ts'),'utf8');
+if(!showcase.includes('portfolioProjects.filter(p=>!creativeIds.has(p.id))')) failures.push('Project DNA no deduplica proyectos creativos');
+for (const id of ['nebula','synapse','atlas','eon','speed']){
+  if(!showcase.includes(`id: '${id}'`))failures.push(`Falta panel creativo de ${id}`);
 }
-console.log(`Proyectos: ${ids.length} · Portadas: ${covers.length} · Imágenes adicionales: ${gallery.length} · Archivos críticos: ${required.length}`);
-if (failures) process.exit(1);
-console.log('OK: controles estructurales superados. Esto NO reemplaza npm run build.');
+const reexport=fs.readFileSync(path.join(root,'src/data/portfolioProjects.ts'),'utf8');
+if(!reexport.includes("from '../app/data/projects'"))failures.push('La galería no usa la misma fuente de datos');
+const cases=fs.readFileSync(path.join(root,'src/app/data/creativeCases.ts'),'utf8');
+for(const image of cases.matchAll(/src: '(\/projects\/[^']+)'/g)) if(!fs.existsSync(path.join(root,'public',image[1].slice(1))))failures.push(`Falta captura de caso: ${image[1]}`);
+for(const problem of failures)console.error('ERROR:',problem);
+console.log(`Catálogo: ${projects.length} proyectos · 7 pósteres nuevos · 8 demos con GitHub · ${failures.length} incidencias`);
+if(failures.length)process.exit(1);
+console.log('OK: estructura y vínculos internos verificados. La compilación y las demos externas se validan por separado.');

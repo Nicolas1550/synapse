@@ -1,5 +1,5 @@
-// 17 proyectos originales conservados (SYNAPSE actualizado) + ATLAS y EON.
-// MakeUp y Peluquería mantienen repositorios y videos: el despliegue público es una demo parcial.
+// Catálogo único de 22 proyectos: trabajos profesionales + Creative Lab.
+// Las demos de MakeUp y Peluquería son parciales, según el historial del portfolio.
 export type PortfolioProject = {
  id: string; title: string; originalTitle: string; role: string; category: string; summary: string; description: string; technologies: string[]; image: string; link: string | null; frontendGithub: string | null; backendGithub: string | null; github: string | null; demoVideo: string | null; featured: boolean; demoLimited: boolean; creative?: boolean; caseStudy?: string; comingSoon?: boolean;
 };
@@ -28,7 +28,8 @@ export const portfolioProjects: PortfolioProject[] = [
     "featured": true,
     "demoLimited": false,
     "creative": true,
-    "caseStudy": "/projects/nebula"
+    "caseStudy": "/projects/nebula",
+    "comingSoon": false
   },
   {
     "id": "synapse",
@@ -60,17 +61,20 @@ export const portfolioProjects: PortfolioProject[] = [
   {
     "id": "atlas",
     "title": "ATLAS",
-    "originalTitle": "ATLAS",
-    "role": "Full Stack / Desarrollo web",
-    "category": "Experiencias creativas",
-    "summary": "Proyecto web ATLAS publicado en Vercel",
-    "description": "Proyecto personal ATLAS, con aplicación desplegada y código fuente disponible para consultar su implementación.",
+    "originalTitle": "ATLAS — Global Seismic Intelligence Platform",
+    "role": "Full Stack / Data Visualization",
+    "category": "Full Stack",
+    "summary": "Inteligencia sísmica global con globo 3D, datos USGS y persistencia",
+    "description": "Plataforma Full Stack para explorar actividad sísmica mundial. Integra información de USGS, visualización geoespacial sobre un globo 3D y herramientas de consulta histórica. Incorpora autenticación, registros en PostgreSQL (Neon), alertas y una integración de eventos de seguridad con SENTINEL.",
     "technologies": [
       "Next.js",
+      "TypeScript",
       "React",
-      "TypeScript"
+      "Three.js",
+      "PostgreSQL",
+      "USGS API"
     ],
-    "image": "/projects/atlas.svg",
+    "image": "/projects/atlas.webp",
     "link": "https://atlas-gamma-blue.vercel.app/",
     "frontendGithub": null,
     "backendGithub": null,
@@ -78,23 +82,25 @@ export const portfolioProjects: PortfolioProject[] = [
     "demoVideo": null,
     "featured": true,
     "demoLimited": false,
-    "creative": true
+    "creative": true,
+    "comingSoon": false
   },
   {
     "id": "eon",
     "title": "EON — The Living City",
     "originalTitle": "EON — The Living City",
-    "role": "Creative Developer / Simulación 3D",
+    "role": "Full Stack / Creative 3D",
     "category": "Experiencias creativas",
-    "summary": "Ciudad 3D interactiva con vehículos, peatones y entornos urbanos",
-    "description": "Experiencia de ciudad interactiva desarrollada con tecnologías web y gráficos 3D. Incluye escenarios urbanos y elementos de simulación visual.",
+    "summary": "Una ciudad 3D viva con tráfico, vegetación y experiencias interactivas",
+    "description": "Experiencia Full Stack de exploración urbana con Next.js, Three.js, vehículos, peatones, árboles y escenarios 3D. Incluye funcionalidades de autenticación y gestión de ciudades mediante APIs y persistencia PostgreSQL. Proyecto experimental centrado en combinar simulación visual y arquitectura web.",
     "technologies": [
       "Next.js",
       "React",
+      "Three.js",
       "TypeScript",
-      "Three.js"
+      "PostgreSQL"
     ],
-    "image": "/projects/eon.svg",
+    "image": "/projects/eon.webp",
     "link": "https://eon-three-henna.vercel.app/",
     "frontendGithub": null,
     "backendGithub": null,
@@ -102,7 +108,8 @@ export const portfolioProjects: PortfolioProject[] = [
     "demoVideo": null,
     "featured": true,
     "demoLimited": false,
-    "creative": true
+    "creative": true,
+    "comingSoon": false
   },
   {
     "id": "speed",
@@ -128,7 +135,85 @@ export const portfolioProjects: PortfolioProject[] = [
     "featured": true,
     "demoLimited": false,
     "creative": true,
-    "caseStudy": "/projects/speed"
+    "caseStudy": "/projects/speed",
+    "comingSoon": false
+  },
+  {
+    "id": "frame",
+    "title": "FRAME Studio",
+    "originalTitle": "FRAME Studio V4 — Creator OS",
+    "role": "Creative Tools / Full Stack",
+    "category": "Full Stack",
+    "summary": "Editor audiovisual en navegador con timeline multipista, efectos y exportación",
+    "description": "Editor audiovisual experimental de enfoque local-first, con edición multipista de video, texto y audio, transiciones, keyframes, subtítulos SRT, presets para redes, comentarios de revisión y proyectos guardados en IndexedDB. La demo pública en Vercel funciona como aplicación estática: la edición ocurre en el navegador, sin colaboración remota ni renderizado en servidor.",
+    "technologies": [
+      "JavaScript",
+      "Node.js",
+      "Canvas API",
+      "MediaRecorder",
+      "IndexedDB"
+    ],
+    "image": "/projects/frame.webp",
+    "link": "https://frame-sandy-nine.vercel.app/",
+    "frontendGithub": null,
+    "backendGithub": null,
+    "github": "https://github.com/Nicolas1550/frame",
+    "demoVideo": null,
+    "featured": true,
+    "demoLimited": false,
+    "comingSoon": false
+  },
+  {
+    "id": "sentinel",
+    "title": "SENTINEL",
+    "originalTitle": "SENTINEL V6 — Security Intelligence Platform",
+    "role": "Full Stack / Cybersecurity",
+    "category": "Full Stack",
+    "summary": "Monitoreo de eventos de seguridad, incidentes y aplicaciones conectadas",
+    "description": "Plataforma Full Stack de telemetría y monitoreo de seguridad. Permite registrar aplicaciones, emitir claves de integración y recibir eventos para mostrar actividad, incidentes y señales sospechosas. Incluye detección configurable de accesos fallidos y correlación de incidentes, con almacenamiento en PostgreSQL (Neon) e integración con ATLAS.",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Neon",
+      "API Keys",
+      "Security Events"
+    ],
+    "image": "/projects/sentinel.webp",
+    "link": "https://sentinel-sooty-two.vercel.app/",
+    "frontendGithub": null,
+    "backendGithub": null,
+    "github": "https://github.com/Nicolas1550/sentinel",
+    "demoVideo": null,
+    "featured": true,
+    "demoLimited": false,
+    "comingSoon": false
+  },
+  {
+    "id": "quantum",
+    "title": "QUANTUM — Trading Terminal",
+    "originalTitle": "QUANTUM V16 — Trading Intelligence",
+    "role": "Full Stack / Financial Tech",
+    "category": "Full Stack",
+    "summary": "Terminal de análisis de mercados con gráficos, indicadores y paper trading",
+    "description": "Terminal financiera Full Stack para investigación y operaciones simuladas (paper trading). Incluye gráficos interactivos, indicadores técnicos, watchlists, búsqueda de activos, análisis de carteras y gestión de posiciones demo. Integra datos de proveedores externos según disponibilidad, autenticación y persistencia PostgreSQL (Neon). No ejecuta operaciones bursátiles reales.",
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "PostgreSQL",
+      "Neon",
+      "Market APIs"
+    ],
+    "image": "/projects/quantum.webp",
+    "link": "https://trading-indol-tau.vercel.app/",
+    "frontendGithub": null,
+    "backendGithub": null,
+    "github": "https://github.com/Nicolas1550/trading",
+    "demoVideo": null,
+    "featured": true,
+    "demoLimited": false,
+    "comingSoon": false
   },
   {
     "id": "chicksx",

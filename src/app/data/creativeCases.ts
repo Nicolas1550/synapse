@@ -26,6 +26,7 @@ export const creativeCases: CreativeCase[] = [
       { title: 'INFERNO · Minijuego', description: 'Misión de 60 segundos con movimiento, escudo, asteroides, recolección de núcleos y estados de victoria y derrota.' },
     ],
     images: [
+      { src: '/projects/nebula.webp', alt: 'Portada panorámica del universo 3D NEBULA', caption: 'NEBULA · Vista general del universo y sus tres mundos' },
       { src: '/projects/nebula-origin.webp', alt: 'Vista del planeta ORIGIN de NEBULA', caption: 'ORIGIN · Portfolio y museo 3D' },
       { src: '/projects/nebula-nexus.webp', alt: 'Vista del planeta NEXUS de NEBULA', caption: 'NEXUS · Laboratorio interactivo' },
       { src: '/projects/nebula-inferno.webp', alt: 'Vista del planeta INFERNO de NEBULA', caption: 'INFERNO · Misión arcade' },

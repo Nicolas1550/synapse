@@ -51,10 +51,10 @@ export default async function CreativeProjectPage({ params }: Props) {
             <div className="creative-case-actions">
               {project.link && <a className="btn btn-primary" href={project.link} target="_blank" rel="noopener noreferrer">Ver demo en vivo <FaArrowUpRightFromSquare aria-hidden="true" /></a>}
               {project.github && <a className="btn btn-outline" href={project.github} target="_blank" rel="noopener noreferrer">Ver código en GitHub <FaGithub aria-hidden="true" /></a>}
-              <Link className="btn btn-outline" href="/#projects">Explorar los 17 proyectos <FaArrowRight aria-hidden="true" /></Link>
+              <Link className="btn btn-outline" href="/#projects">Explorar los {portfolioProjects.length} proyectos <FaArrowRight aria-hidden="true" /></Link>
               {!project.link && <Link className="btn btn-outline" href="/contact">Contactarme <FaArrowUpRightFromSquare aria-hidden="true" /></Link>}
             </div>
-            <p className="case-demo-status">{project.comingSoon ? 'SYNAPSE · Próximamente: la demo pública aún no está disponible. Podés explorar las capturas y el proceso de desarrollo en esta ficha.' : 'Demo pública y repositorio disponibles: podés probar la experiencia y revisar su implementación desde los botones anteriores.'}</p>
+            <p className="case-demo-status">{'Demo pública y repositorio disponibles: podés probar la experiencia y revisar su implementación desde los botones anteriores.'}</p>
           </div>
           <div className="creative-case-art">
             <Image src={project.image} alt={`Portada del proyecto ${project.title}`} width={1280} height={720} sizes="(max-width: 850px) 100vw, 55vw" priority />

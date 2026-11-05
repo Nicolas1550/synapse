@@ -5,23 +5,25 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {
   ArrowDownRight, ArrowRight, ArrowUpRight, BriefcaseBusiness, Check,
-  Code2, ExternalLink, Film, Github, Layers3, Play,
+  Code2, ExternalLink, Film, Layers3, Play,
   Sparkles, X
 } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa6';
 import { profile } from '@/data/content';
 import { projectFilters, showcaseProjects, type ProjectFilter, type ShowcaseProject } from '@/data/showcase';
 
 const featuredCount = showcaseProjects.filter(project => project.featured).length;
+const posterIds = new Set(['nebula','synapse','atlas','eon','frame','sentinel','quantum']);
 
 function ExternalAction({ href, label, kind='primary' }: { href:string; label:string; kind?:'primary'|'secondary' }) {
   return <a className={`work-action work-action-${kind}`} href={href} target="_blank" rel="noopener noreferrer">
-    {label === 'VIDEO DEMO' ? <Play size={15} fill="currentColor"/> : label.includes('CÓDIGO') ? <Github size={16}/> : <ExternalLink size={16}/>}
+    {label === 'VIDEO DEMO' ? <Play size={15} fill="currentColor"/> : label.includes('CÓDIGO') ? <FaGithub size={16}/> : <ExternalLink size={16}/>}
     {label}<ArrowUpRight size={14}/>
   </a>;
 }
 
 function ProjectPicture({ project, priority=false, large=false }: { project:ShowcaseProject; priority?:boolean; large?:boolean }) {
-  return <div className={`work-image ${large?'work-image-large':''}`}>
+  return <div className={`work-image ${large?'work-image-large':''} ${posterIds.has(project.id)?'work-image-poster':''}`}>
     <Image src={project.image} alt={`Imagen del proyecto ${project.title}`} fill sizes={large?'(max-width: 900px) 100vw, 58vw':'(max-width: 900px) 100vw, 45vw'} priority={priority} className="work-image-photo"/>
     <div className="work-image-tint"/>
     <div className="work-image-corner" aria-hidden="true"><span/><span/></div>
@@ -91,7 +93,7 @@ function CaseStudy({project,close}: {project:ShowcaseProject;close:()=>void}) {
   return createPortal(<div className="work-modal-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget)close()}}>
     <div className="work-modal" ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="work-modal-title" aria-describedby="work-modal-description">
       <div className="work-modal-toolbar"><span>PROJECT DNA / {project.id.toUpperCase()}</span><button type="button" ref={closeRef} onClick={close} aria-label="Cerrar caso de estudio"><X size={20}/> CERRAR</button></div>
-      <div className="work-modal-picture"><ProjectPicture project={project}/></div>
+      <div className="work-modal-picture"><ProjectPicture project={project}/><a className="work-full-image-link" href={project.image} target="_blank" rel="noopener noreferrer">VER PORTADA COMPLETA <ExternalLink size={14}/></a></div>
       <div className="work-modal-content"><div className="work-modal-heading"><p>{project.category.toUpperCase()} / CASE STUDY</p><h2 id="work-modal-title">{project.title}<span>.</span></h2><p className="work-modal-lead">{project.summary}</p></div>
         <div className="work-modal-details"><div><span>MI ROL</span><strong>{project.role}</strong></div><div><span>TIPO DE PROYECTO</span><strong>{project.category}</strong></div></div>
         <div className="work-modal-story"><span>01 / QUÉ SE DESARROLLÓ</span><p id="work-modal-description">{project.description}</p></div>

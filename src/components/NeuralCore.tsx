@@ -7,6 +7,11 @@ import * as THREE from 'three';
 export type Shape = 'sphere' | 'dna' | 'tree';
 export const neuralNodes = [
   { label: 'NEBULA', category: 'PROJECT', detail: 'Universo 3D interactivo: exploración, storytelling y proyectos.', href: '#work' },
+  { label: 'FRAME', category: 'PROJECT', detail: 'Editor audiovisual con timeline, capas, efectos y exportación desde el navegador.', href: '#work' },
+  { label: 'SENTINEL', category: 'PROJECT', detail: 'Telemetría de seguridad, detección y gestión de incidentes.', href: '#work' },
+  { label: 'QUANTUM', category: 'PROJECT', detail: 'Terminal Full Stack de mercados, cartera, gráficos y operaciones simuladas.', href: '#work' },
+  { label: 'ATLAS', category: 'PROJECT', detail: 'Inteligencia sísmica global con globo 3D y eventos USGS.', href: '#work' },
+  { label: 'EON', category: 'PROJECT', detail: 'Ciudad virtual 3D con exploración y simulación urbana.', href: '#work' },
   { label: 'MakeUp', category: 'PROJECT', detail: 'E-commerce: la demo muestra funciones que requieren backend.', href: '#work' },
   { label: 'Peluquería', category: 'PROJECT', detail: 'Plataforma de servicios con demostración de su experiencia.', href: '#work' },
   { label: 'SYNAPSE', category: 'PROJECT', detail: 'Interfaz neuronal interactiva desarrollada con React Three Fiber.', href: '#lab' },

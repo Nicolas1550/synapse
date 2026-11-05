@@ -140,3 +140,13 @@ body{background:#03070d}
 @media(prefers-reduced-motion:reduce){.work-card,.work-image-photo,.work-image-open,.work-filter,.work-primary-button{transition:none!important}.work-card:hover,.work-card:hover .work-image-photo,.work-spotlight:hover .work-image-photo{transform:none!important}}
 /* Keep the NEBULA planets in focus; the title and explanation live beside the image. */
 .work-spotlight-visual .work-image-photo{object-position:85% center}
+
+/* 2026 portfolio update: preserve poster compositions, text and full-image actions. */
+.work-image-poster{background:radial-gradient(circle at center,#18273a 0%,#050c16 80%)}
+.work-image-poster .work-image-photo,.work-spotlight-visual .work-image-poster .work-image-photo{object-fit:contain;object-position:center}
+.work-image-poster .work-image-tint{background:linear-gradient(to top,rgba(3,8,16,.16),transparent 35%)}
+.work-image-poster .work-image-caption{display:none}
+.work-card:hover .work-image-poster .work-image-photo,.work-spotlight:hover .work-image-poster .work-image-photo{transform:none;filter:saturate(1.05)}
+.work-modal-picture{position:relative;background:#050a12}
+.work-full-image-link{position:absolute;right:14px;bottom:14px;z-index:2;display:inline-flex;align-items:center;gap:9px;background:#071b2be8;border:1px solid #5ca5b8;color:#e0faff;border-radius:3px;padding:11px 13px;font:10px 'DM Mono',monospace;letter-spacing:.07em}
+.work-full-image-link:hover{background:#175069}

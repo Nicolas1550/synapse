@@ -8,7 +8,7 @@ import { portfolioProjects } from '../../data/projects';
 const filters = ['Todos', 'Experiencias creativas', 'Full Stack', 'Calidad & producto', 'Liderazgo', 'Web & UX'];
 // Tres proyectos de Creative Lab primero, seguidos de los casos profesionales.
 const orderedProjects = [...portfolioProjects].sort((a,b) => {
-  const priority=['nebula','synapse','atlas','eon','speed','boticpartners','equilibrio','chicksgold','chicksx','tangoWeb','congreso'];
+  const priority=['nebula','synapse','atlas','eon','speed','frame','sentinel','quantum','boticpartners','equilibrio','chicksgold','chicksx','tangoWeb','congreso'];
   const aIndex=priority.indexOf(a.id);
   const bIndex=priority.indexOf(b.id);
   if(aIndex>=0&&bIndex>=0)return aIndex-bIndex;
@@ -34,7 +34,7 @@ export default function Projects() {
           <div><p className="section-kicker">01 / TRABAJOS SELECCIONADOS</p><h2>Proyectos con <span className="gradient-text">impacto real.</span></h2><p>Desarrollo Full Stack, producto y experiencias creativas. Explorá los proyectos, sus decisiones técnicas y mi participación.</p></div>
           <span className="section-counter">{portfolioProjects.length} PROYECTOS / 05 ÁREAS</span>
         </div>
-        <div className="creative-showcase-note"><span className="creative-showcase-pulse" aria-hidden="true"/><div><strong>CREATIVE LAB · 2026</strong><p>NEBULA, SYNAPSE, ATLAS, EON y SPEED: proyectos personales que muestran experiencias inmersivas, desarrollo web y motion design.</p></div></div>
+        <div className="creative-showcase-note"><span className="creative-showcase-pulse" aria-hidden="true"/><div><strong>CREATIVE LAB · 2026</strong><p>NEBULA, SYNAPSE, ATLAS, EON, SPEED, FRAME, SENTINEL y QUANTUM: proyectos personales que muestran experiencias inmersivas, desarrollo web y motion design.</p></div></div>
         <div className="project-toolbar">
           <div className="filters" role="group" aria-label="Filtrar por especialidad">
             {filters.map(item => <button type="button" key={item} onClick={() => {setFilter(item);setShowAll(true);}} className={`filter-chip ${filter===item ? 'active' : ''}`} aria-pressed={filter===item}>{item}</button>)}
@@ -52,10 +52,10 @@ export default function Projects() {
               <div className="project-heading-row"><h3>{project.title}</h3><span className="project-category">{project.category}</span></div>
               <p className="project-summary">{project.summary}</p>
               <div className="tech-tags">{project.technologies.slice(0,4).map(t => <span key={t}>{t}</span>)}{project.technologies.length>4 && <span>+{project.technologies.length-4}</span>}</div>
-              {project.comingSoon && <div className="demo-notice"><strong>Próximamente</strong><span>La demo pública de SYNAPSE está en preparación. Mientras tanto, podés ver su caso de estudio y las capturas del proyecto.</span></div>}
               {project.demoLimited && <div className="demo-notice"><strong>Demo pública parcial</strong><span>El despliegue actual muestra principalmente la interfaz; el backend y el catálogo no se mantienen activos por costos de infraestructura. El video y los repositorios permiten conocer más del desarrollo.</span></div>}
               <details className="case-details"><summary>Ver mi trabajo y detalles técnicos <FaArrowRight aria-hidden="true"/></summary><p>{project.description}</p></details>
               <div className="project-actions">
+                <a href={project.image} target="_blank" rel="noopener noreferrer"><FaArrowUpRightFromSquare/> Ver portada completa</a>
                 {project.caseStudy && <Link href={project.caseStudy} className="project-case-link"><FaArrowRight/> Ver caso de estudio</Link>}
                 {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer"><FaArrowUpRightFromSquare/> {project.demoLimited ? 'Ver interfaz' : project.creative ? 'Ver demo en vivo' : 'Visitar sitio'}</a>}
                 {project.demoVideo && <a href={project.demoVideo} target="_blank" rel="noopener noreferrer"><FaPlay/> Video demo</a>}
